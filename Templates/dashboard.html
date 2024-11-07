@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Sustainify</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+
+<!-- Navigation Bar -->
+<nav class="bg-white shadow-md p-4">
+    <div class="container mx-auto flex justify-between items-center">
+        <a href="#" class="text-2xl font-bold text-green-600">Sustainify</a>
+        <div>
+            <a href="{% url 'logout' %}" class="text-green-600 font-semibold mx-4">Logout</a>
+        </div>
+    </div>
+</nav>
+
+<!-- Main Content -->
+<div class="container mx-auto py-8">
+    <h1 class="text-3xl font-semibold text-gray-800 mb-6">Welcome to Your Dashboard</h1>
+
+    <!-- Overview Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <!-- Water Consumption -->
+        <div class="bg-white p-6 rounded-lg shadow-md">
+            <h2 class="text-lg font-semibold text-gray-700 mb-2">Water Consumption</h2>
+            <p class="text-3xl font-bold text-green-600">200L</p>
+            <p class="text-sm text-gray-500 mt-2">Tracked Today</p>
+        </div>
+        
+        <!-- Carbon Footprint -->
+        <div class="bg-white p-6 rounded-lg shadow-md">
+            <h2 class="text-lg font-semibold text-gray-700 mb-2">Carbon Footprint</h2>
+            <p class="text-3xl font-bold text-green-600">15kg CO₂</p>
+            <p class="text-sm text-gray-500 mt-2">Tracked This Month</p>
+        </div>
+        
+        <!-- Sustainable Choices -->
+        <div class="bg-white p-6 rounded-lg shadow-md">
+            <h2 class="text-lg font-semibold text-gray-700 mb-2">Sustainable Choices</h2>
+            <p class="text-3xl font-bold text-green-600">8</p>
+            <p class="text-sm text-gray-500 mt-2">Actions Completed</p>
+        </div>
+        
+        <!-- Progress -->
+        <div class="bg-white p-6 rounded-lg shadow-md">
+            <h2 class="text-lg font-semibold text-gray-700 mb-2">Overall Progress</h2>
+            <p class="text-3xl font-bold text-green-600">65%</p>
+            <p class="text-sm text-gray-500 mt-2">Towards Sustainability Goal</p>
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <div class="bg-white p-6 rounded-lg shadow-md mb-8">
+        <h2 class="text-2xl font-semibold text-gray-700 mb-4">Features</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Community Composting -->
+            <div class="bg-gray-50 p-4 rounded-md">
+                <h3 class="text-lg font-semibold text-green-600 mb-2">Community Composting</h3>
+                <p class="text-gray-600 text-sm">Join or create a community composting project in your area.</p>
+                <button class="mt-4 bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700">Get Started</button>
+            </div>
+
+            <!-- Eco-friendly Product Finder -->
+            <div class="bg-gray-50 p-4 rounded-md">
+                <h3 class="text-lg font-semibold text-green-600 mb-2">Eco-friendly Product Finder</h3>
+                <p class="text-gray-600 text-sm">Discover and purchase sustainable, eco-friendly products.</p>
+                <button class="mt-4 bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700">Find Products</button>
+            </div>
+
+            <!-- Carbon Footprint Tracker -->
+            <div class="bg-gray-50 p-4 rounded-md">
+                <h3 class="text-lg font-semibold text-green-600 mb-2">Carbon Footprint Tracker</h3>
+                <p class="text-gray-600 text-sm">Track your carbon emissions and set goals to reduce them.</p>
+                <button class="mt-4 bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700">Track Now</button>
+            </div>
+
+            <!-- Zero Waste Challenge Tracker -->
+            <div class="bg-gray-50 p-4 rounded-md">
+                <h3 class="text-lg font-semibold text-green-600 mb-2">Zero Waste Challenge Tracker</h3>
+                <p class="text-gray-600 text-sm">Participate in challenges to reduce waste in your life.</p>
+                <button class="mt-4 bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700">Join Challenge</button>
+            </div>
+
+            <!-- Placeholder for Future Graphs -->
+            <div class="bg-gray-50 p-4 rounded-md col-span-1 md:col-span-2">
+                <h3 class="text-lg font-semibold text-green-600 mb-2">Your Progress Over Time</h3>
+                <p class="text-gray-600 text-sm">Graphical representation of your sustainability journey will be displayed here.</p>
+                <div class="bg-gray-200 h-32 mt-4 rounded"></div> <!-- Placeholder for future graph -->
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

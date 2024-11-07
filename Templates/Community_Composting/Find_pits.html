@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+
+{% block title %}Find Composting Pits - Sustainify{% endblock %}
+
+{% block content %}
+<div class="container mx-auto py-8">
+    <!-- Title -->
+    <h1 class="text-4xl font-bold text-gray-800 mb-8 text-center">Find Nearby Composting Pits</h1>
+
+    <!-- Map Section -->
+    <div class="bg-white rounded-lg shadow-lg mb-8 p-6">
+        <h2 class="text-2xl font-semibold text-gray-700 mb-4 text-center">Composting Pits Near You</h2>
+        <div id="map" style="width: 100%; height: 400px;" class="rounded-lg"></div>
+    </div>
+
+    <!-- Add Composting Pit Form -->
+    <div class="bg-white p-8 rounded-lg shadow-md mb-8">
+        <h2 class="text-2xl font-semibold text-gray-700 mb-6 text-center">Add a Composting Pit</h2>
+        <form method="POST" action="{% url 'add_composting_pit' %}" class="space-y-6">
+            {% csrf_token %}
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="col-span-1">
+                    <label for="name" class="block text-sm font-medium text-gray-700">Pit Name</label>
+                    <input type="text" name="name" id="name" class="mt-1 p-3 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500" required>
+                </div>
+                <div class="col-span-1">
+                    <label for="location" class="block text-sm font-medium text-gray-700">Location (Address)</label>
+                    <input type="text" name="location" id="location" class="mt-1 p-3 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500" required>
+                </div>
+                <div class="col-span-1">
+                    <label for="latitude" class="block text-sm font-medium text-gray-700">Latitude</label>
+                    <input type="number" step="any" name="latitude" id="latitude" class="mt-1 p-3 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500" required>
+                </div>
+                <div class="col-span-1">
+                    <label for="longitude" class="block text-sm font-medium text-gray-700">Longitude</label>
+                    <input type="number" step="any" name="longitude" id="longitude" class="mt-1 p-3 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500" required>
+                </div>
+            </div>
+            <div class="text-center">
+                <button type="submit" class="mt-4 bg-green-600 text-white py-3 px-6 rounded-lg hover:bg-green-700 transition duration-300 shadow-md focus:outline-none focus:ring-2 focus:ring-green-500">Add Pit</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- List of Nearby Composting Pits -->
+<div class="bg-white p-8 rounded-lg shadow-md">
+    <h2 class="text-2xl font-semibold text-gray-700 mb-6 text-center">Nearby Composting Pits</h2>
+    {% if composting_pits %}
+        <ul class="space-y-4">
+            {% for pit in composting_pits %}
+            {% if pit.owner == user %}
+                <li class="flex justify-between items-center py-4 px-6 bg-gray-50 rounded-lg shadow-sm hover:bg-gray-100 transition">
+                    <div>
+                        <h3 class="font-semibold text-lg text-gray-700">{{ pit.name }}</h3>
+                        <p class="text-sm text-gray-500">{{ pit.location }}</p>
+                    </div>
+                    
+                        <!-- Remove button for the user who owns the pit -->
+                        <form method="POST" action="{% url 'remove_composting_pit' pit.id %}" class="ml-4">
+                            {% csrf_token %}
+                            <button type="submit" class="text-red-600 hover:text-red-700">Remove Pit</button>
+                        </form>
+                    
+                </li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p class="text-gray-600 text-center">No composting pits found nearby. Add one above!</p>
+    {% endif %}
+
+</div>
+
+<!-- Leaflet.js Library -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+<script>
+    // Initialize the Leaflet map
+    var map = L.map('map').setView([20.5937, 78.9629], 5); // Center on India with an initial zoom level
+
+    // Add OpenStreetMap tile layer
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    // Add composting pit markers
+    const compostingPits = {{ composting_pits_json|safe }};
+    compostingPits.forEach(function(pit) {
+        const marker = L.marker([pit.latitude, pit.longitude]).addTo(map);
+        let popupContent = `<b>${pit.name}</b><br>${pit.location}`;
+        
+        marker.bindPopup(popupContent);
+    });
+
+    // Map click to auto-fill latitude/longitude fields
+    map.on('click', function(e) {
+        document.getElementById('latitude').value = e.latlng.lat;
+        document.getElementById('longitude').value = e.latlng.lng;
+    });
+</script>
+{% endblock %}

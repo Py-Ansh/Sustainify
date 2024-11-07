@@ -1,0 +1,164 @@
+{% extends "base.html" %}
+
+{% block content %}
+  
+
+
+
+
+
+
+
+  <!-- Hero Section -->
+  <section class="flex items-center justify-center py-20 bg-green-100">
+    <div class="text-center">
+      <h1 class="text-4xl md:text-6xl font-bold text-green-700">Make Sustainable Choices Easy</h1>
+      <p class="mt-4 text-lg text-green-600">Track, measure, and improve your impact on the planet with Sustainify.</p>
+      <div class="mt-6">
+        <a href="#" class="bg-green-600 text-white font-semibold py-3 px-8 rounded-md hover:bg-green-700">Get Started</a>
+      </div>
+    </div>
+  </section>
+
+ <!-- Features Section -->
+<section class="container mx-auto py-16 px-4">
+    <h2 class="text-3xl font-bold text-green-700 text-center mb-8">Our Features</h2>
+    <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+  
+      <!-- Feature Card: Eco-Friendly Product Finder -->
+      <div class="bg-white border border-transparent rounded-lg p-6 text-center shadow-lg transition-transform duration-300 hover:scale-105 hover:border-green-300 hover:shadow-2xl">
+        <div class="text-green-600 mb-4">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h18v18H3V3zm3 9h12m-7 0v6m4-6v6" />
+          </svg>
+        </div>
+        <h3 class="text-xl font-semibold text-green-700">Eco-Friendly Product Finder</h3>
+        <p class="text-green-600 mt-2">Discover sustainable alternatives for daily products.</p>
+      </div>
+  
+      <!-- Feature Card: Carbon Footprint Tracker -->
+      <div class="bg-white border border-transparent rounded-lg p-6 text-center shadow-lg transition-transform duration-300 hover:scale-105 hover:border-green-300 hover:shadow-2xl">
+        <div class="text-green-600 mb-4">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V2H7v7H3v7h18v-7h-4z" />
+          </svg>
+        </div>
+        <h3 class="text-xl font-semibold text-green-700">Carbon Footprint Tracker</h3>
+        <p class="text-green-600 mt-2">Monitor and minimize your carbon emissions effortlessly.</p>
+      </div>
+  
+      <!-- Feature Card: Zero Waste Challenge -->
+      <div class="bg-white border border-transparent rounded-lg p-6 text-center shadow-lg transition-transform duration-300 hover:scale-105 hover:border-green-300 hover:shadow-2xl">
+        <div class="text-green-600 mb-4">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2v20m-5-5l10-10" />
+          </svg>
+        </div>
+        <h3 class="text-xl font-semibold text-green-700">Zero Waste Challenge</h3>
+        <p class="text-green-600 mt-2">Participate in eco-friendly challenges and track your progress.</p>
+      </div>
+  
+      <!-- Feature Card: Community Composting Platform -->
+      <div class="bg-white border border-transparent rounded-lg p-6 text-center shadow-lg transition-transform duration-300 hover:scale-105 hover:border-green-300 hover:shadow-2xl">
+        <div class="text-green-600 mb-4">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zm-8 8a8 8 0 0116 0H4z" />
+          </svg>
+        </div>
+        <h3 class="text-xl font-semibold text-green-700">Community Composting</h3>
+        <p class="text-green-600 mt-2">Connect with others for local composting solutions.</p>
+      </div>
+  
+    </div>
+  </section>
+  
+
+  <!-- Call to Action Section -->
+  <section class="bg-green-700 text-white py-12 text-center">
+    <h2 class="text-3xl font-bold">Join the Sustainify Community</h2>
+    <p class="mt-4 text-lg">Take a step towards a sustainable lifestyle. Sign up today!</p>
+    <div class="mt-6">
+      <a href="#" class="bg-white text-green-700 font-semibold py-3 px-8 rounded-md hover:bg-green-100">Sign Up</a>
+    </div>
+  </section>
+
+
+
+  <!-- Signup Modal -->
+<!-- Signup Modal -->
+<div id="signupModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
+    <div class="bg-white rounded-lg max-w-md w-full p-8 relative">
+      <button onclick="toggleModal('signupModal')" class="absolute top-2 right-2 text-gray-600 hover:text-gray-900">✕</button>
+      <h2 class="text-2xl font-semibold text-green-700 text-center mb-4">Sign Up for Sustainify</h2>
+      <form method="post" action="{% url 'signup' %}">
+        {% csrf_token %}
+        <div class="mb-4">
+          <label for="id_username" class="block text-gray-700">Username</label>
+          <input type="text" name="username" id="id_username" required class="w-full p-2 border border-gray-300 rounded">
+        </div>
+        <div class="mb-4">
+          <label for="id_password1" class="block text-gray-700">Password</label>
+          <input type="password" name="password1" id="id_password1" required class="w-full p-2 border border-gray-300 rounded">
+        </div>
+        <div class="mb-4">
+          <label for="id_password2" class="block text-gray-700">Confirm Password</label>
+          <input type="password" name="password2" id="id_password2" required class="w-full p-2 border border-gray-300 rounded">
+        </div>
+        <button type="submit" class="mt-4 bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700 w-full">Sign Up</button>
+      </form>
+      <p class="mt-4 text-center">Already have an account? <a href="#" onclick="toggleModal('loginModal'); toggleModal('signupModal');" class="text-green-600 underline">Log in here</a>.</p>
+    </div>
+  </div>
+  
+  
+  <!-- Login Modal -->
+<!-- Login Modal -->
+<div id="loginModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
+    <div class="bg-white rounded-lg max-w-md w-full p-8 relative">
+      <button onclick="toggleModal('loginModal')" class="absolute top-2 right-2 text-gray-600 hover:text-gray-900">✕</button>
+      <h2 class="text-2xl font-semibold text-green-700 text-center mb-4">Log In to Sustainify</h2>
+      <form method="post" action="{% url 'login' %}">
+        {% csrf_token %}
+        <div class="mb-4">
+          <label for="id_username" class="block text-gray-700">Username</label>
+          <input type="text" name="username" id="id_username" required class="w-full p-2 border border-gray-300 rounded">
+        </div>
+        <div class="mb-4">
+          <label for="id_password" class="block text-gray-700">Password</label>
+          <input type="password" name="password" id="id_password" required class="w-full p-2 border border-gray-300 rounded">
+        </div>
+        <button type="submit" class="mt-4 bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700 w-full">Log In</button>
+      </form>
+      <p class="mt-4 text-center">New to Sustainify? <a href="#" onclick="toggleModal('signupModal'); toggleModal('loginModal');" class="text-green-600 underline">Sign up here</a>.</p>
+    </div>
+  </div>
+  
+
+
+
+
+
+
+
+
+
+  <script>
+    function toggleModal(modalId) {
+      const modal = document.getElementById(modalId);
+      modal.classList.toggle("hidden");
+    }
+
+
+    // JavaScript for fade-out effect on close
+  document.querySelectorAll('.message button').forEach(button => {
+  button.addEventListener('click', (e) => {
+      const message = e.target.closest('.message');
+      message.classList.add('opacity-0');
+      setTimeout(() => message.remove(), 300); // Wait for fade-out effect before removing the element
+  });
+});
+
+  </script>
+  
+
+{% endblock content %}
